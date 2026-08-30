@@ -1,0 +1,46 @@
+spring.application.name=spring-boot-mastery
+debug=true
+
+server.port=8080
+
+# ===== H2 in-memory DB (swap for postgres in real project) =====
+spring.datasource.url=jdbc:h2:mem:masterydb
+spring.datasource.driver-class-name=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.h2.console.enabled=true
+# console available at /h2-console when running
+
+
+# ===== Redis =====
+spring.data.redis.host=localhost
+spring.data.redis.port=6379
+
+spring.kafka.bootstrap-servers=localhost:9092
+spring.kafka.consumer.group-id=mastery-group
+spring.kafka.consumer.key-deserializer=org.apache.kafka.common.serialization.StringDeserializer
+spring.kafka.consumer.value-deserializer=org.springframework.kafka.support.serializer.JsonDeserializer
+spring.kafka.consumer.properties.spring.json.trusted.packages=com.example.mastery.dto
+spring.kafka.consumer.properties.spring.json.value.default.type=com.example.mastery.dto.OrderEvent
+spring.kafka.consumer.properties.spring.json.use.type.headers=false
+
+spring.kafka.producer.key-serializer=org.apache.kafka.common.serialization.StringSerializer
+spring.kafka.producer.value-serializer=org.springframework.kafka.support.serializer.JsonSerializer
+
+
+
+# ===== JWT =====
+app.jwt.secret=this-is-a-demo-secret-key-change-in-production-please-1234567890
+app.jwt.expiration-ms=900000
+
+#==============
+
+resilience4j.circuitbreaker.instances.paymentService.sliding-window-size=5
+resilience4j.circuitbreaker.instances.paymentService.failure-rate-threahold=50
+resilience4j.circuitbreaker.instances.paymentService.wait-duration-in-open-state=10s
+resilience4j.circuitbreaker.instances.paymentService.permit-number-of-call-in-half-open-state=2
+
+
+
